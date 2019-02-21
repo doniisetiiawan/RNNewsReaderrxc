@@ -15,7 +15,7 @@ const onActionSelected = (
   fetchArticles(items[index].filter);
 };
 
-const Categories = ({ items, fetchArticles, selectCategory }) => (
+const CategoriesAndroid = ({ items, fetchArticles, selectCategory }) => (
   <ToolbarAndroid
     style={styles.toolbar}
     title="All"
@@ -28,16 +28,18 @@ const Categories = ({ items, fetchArticles, selectCategory }) => (
   />
 );
 
-Categories.propTypes = {
+CategoriesAndroid.defaultProps = {
+  items: [],
+};
+
+CategoriesAndroid.propTypes = {
   fetchArticles: PropTypes.func.isRequired,
-  items: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-  })).isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({ title: PropTypes.string.isRequired })),
   selectCategory: PropTypes.func.isRequired,
 };
 
 export default connect(
-  state => state.get('Categories').toJS(),
+  state => state.get('CategoriesAndroid').toJS(),
   dispatch => ({
     fetchArticles: _fetchArticles(dispatch),
     selectCategory: title => dispatch({
@@ -45,4 +47,4 @@ export default connect(
       payload: title,
     }),
   }),
-)(Categories);
+)(CategoriesAndroid);

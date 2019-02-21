@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchArticle } from '../actions';

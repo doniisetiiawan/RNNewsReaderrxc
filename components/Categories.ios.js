@@ -15,7 +15,7 @@ const Categories = ({ items, children, selectTab }) => (
     style={styles.tabBar}
   >
     {items.map(i => (
-      <TabBarIOS.TabBarItemIOS
+      <TabBarIOS.Item
         key={i.title}
         title={i.title}
         selected={i.selected}
@@ -27,27 +27,26 @@ const Categories = ({ items, children, selectTab }) => (
         renderAsOriginal
       >
         {children}
-      </TabBarIOS.TabBarItemIOS>
+      </TabBarIOS.Item>
     ))}
   </TabBarIOS>
 );
 
 Categories.propTypes = {
-  children: PropTypes.node.isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      selectTab: PropTypes.bool.isRequired,
+      selected: PropTypes.bool.isRequired,
     }),
   ).isRequired,
+  children: PropTypes.node.isRequired,
   selectTab: PropTypes.func.isRequired,
 };
 
 export default connect(
-  state => state.get('Categories').toJS(),
+  (state, ownProps) => Object.assign(state.get('Categories').toJS(), ownProps),
   dispatch => ({
-    fetchArticles: _fetchArticles(dispatch),
-    selectCategory: title => dispatch({
+    selectTab: title => dispatch({
       type: 'SELECT_CATEGORY',
       payload: title,
     }),

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, TouchableHighlight, Text } from 'react-native';
+import { FlatList, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 
 import styles from '../styles';
@@ -13,6 +13,13 @@ class ArticleList extends Component {
     navigation: PropTypes.any.isRequired,
   };
 
+  static getDerivedStateFromProps({ items }, state) {
+    return {
+      ...state,
+      source: items,
+    };
+  }
+
   state = {
     source: [],
   };
@@ -22,7 +29,7 @@ class ArticleList extends Component {
   }
 
   renderRow = action => ({ item: { value } }) => (
-    <TouchableHighlight onPause={action(value.id)}>
+    <TouchableHighlight onPress={action(value.id)}>
       <Text>{value.title}</Text>
     </TouchableHighlight>
   );
@@ -44,7 +51,7 @@ class ArticleList extends Component {
 
 export default connect(
   (state, ownProps) => ({
-    ...state.get('Article').toJS(),
+    ...state.get('ArticlesAndroid').toJS(),
     ...ownProps,
   }),
   dispatch => ({

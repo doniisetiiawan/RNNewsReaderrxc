@@ -4,11 +4,11 @@ import { View } from 'react-native';
 import Categories from './Categories';
 import ArticleList from './ArticleList';
 
-const Articles = props => (
+const ArticlesAndroid = props => (
   <View>
     <Categories />
     <ArticleList {...props} />
   </View>
 );
 
-export default Articles;
+export default ArticlesAndroid;
